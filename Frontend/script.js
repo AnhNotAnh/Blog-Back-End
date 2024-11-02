@@ -34,3 +34,43 @@ function displayData(data) {
 }
 
 fetchBlog();
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Select button and input field
+    const postButton = document.getElementById('postBlog');
+    const titleInput = document.getElementById('title');
+    const contentInput = document.getElementById('content');
+    const dataContainer = document.getElementById('data-container');
+
+    // When post button is clicked
+    postButton.addEventListener('click', () => {
+        const contentValue = contentInput.value;
+        const titleValue = titleInput.value;
+
+        if (contentValue.trim() !== '' && titleValue.trim() !== '') {
+            // Create a div for the blog post
+            const blogPost = document.createElement('div');
+            blogPost.className = 'blog-post';
+    
+            // Create the title element
+            const postTitle = document.createElement('h2');
+            postTitle.textContent = titleValue;
+    
+            // Create the content element
+            const postContent = document.createElement('p');
+            postContent.textContent = contentValue;
+    
+            // Append title and content to the blog post div
+            blogPost.appendChild(postTitle);
+            blogPost.appendChild(postContent);
+            dataContainer.appendChild(blogPost);
+
+            // Clear the input fields
+            contentInput.value = '';
+            titleInput.value = '';
+        } else {
+            alert('Please enter some content or title before posting!');
+        }
+    });
+});
+
