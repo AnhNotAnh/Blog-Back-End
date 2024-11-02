@@ -1,0 +1,64 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#blog-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.blog-post {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 10px 0;
+}
+
+.blog-post:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.blog-post h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.blog-post p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.row {
+    margin-bottom: 20px; /* Space between rows */
+    padding: 10px;
+    border: 1px solid #ccc; /* Optional: add border */
+    border-radius: 5px; /* Optional: rounded corners */
+}
+
+input[type="text"] {
+    margin-right: 10px; /* Space between input and button */
+    padding: 5px;
+}
+
+button {
+    padding: 5px 10px; /* Button padding */
+    background-color: #007BFF; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 3px; /* Rounded button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker color on hover */
+}
