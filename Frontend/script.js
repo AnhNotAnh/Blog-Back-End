@@ -43,31 +43,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const dataContainer = document.getElementById('data-container');
 
     // When post button is clicked
-    postButton.addEventListener('click', () => {
+    postButton.addEventListener('click', async () => {
         const contentValue = contentInput.value;
         const titleValue = titleInput.value;
 
         if (contentValue.trim() !== '' && titleValue.trim() !== '') {
-            // Create a div for the blog post
-            const blogPost = document.createElement('div');
-            blogPost.className = 'blog-post';
-    
-            // Create the title element
-            const postTitle = document.createElement('h2');
-            postTitle.textContent = titleValue;
-    
-            // Create the content element
-            const postContent = document.createElement('p');
-            postContent.textContent = contentValue;
-    
-            // Append title and content to the blog post div
-            blogPost.appendChild(postTitle);
-            blogPost.appendChild(postContent);
-            dataContainer.appendChild(blogPost);
+            //Create a body for post request
+            const postData = {
+                title: titleValue,
+                content: contentValue
+            };
 
-            // Clear the input fields
-            contentInput.value = '';
-            titleInput.value = '';
+            try {
+                const response = await fetch('http://localhost:5000/api/posts', {
+                    method : 'POST',
+                    headers :{
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(postData)
+                });
+
+                // Check if request was successful
+                if (!response.ok) throw new Error('Failed to create a new post.');
+
+                // Parse the JSON response
+                const newPost = await response.json();
+
+                // Create a div for the blog post
+                const blogPost = document.createElement('div');
+                blogPost.className = 'blog-post';
+        
+                // Create the title element
+                const postTitle = document.createElement('h2');
+                postTitle.textContent = newPost.title;
+        
+                // Create the content element
+                const postContent = document.createElement('p');
+                postContent.textContent = newPost.content;
+        
+                // Append title and content to the blog post div
+                blogPost.appendChild(postTitle);
+                blogPost.appendChild(postContent);
+                dataContainer.appendChild(blogPost);
+
+                // Clear the input fields
+                contentInput.value = '';
+                titleInput.value = '';
+            }
+            catch (error) {
+                console.error('Error:', error)
+            }
+            
         } else {
             alert('Please enter some content or title before posting!');
         }
