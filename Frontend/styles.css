@@ -57,6 +57,20 @@ button {
     border: none; /* Remove border */
     border-radius: 3px; /* Rounded button */
     cursor: pointer; /* Pointer cursor on hover */
+    margin: 3px;
+}
+
+.dangerButton{
+    padding: 5px 10px; /* Button padding */
+    background-color: red; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 3px; /* Rounded button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.dangerButton:hover{
+    background-color: black;
 }
 
 button:hover {

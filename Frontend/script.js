@@ -133,10 +133,16 @@ const editPost = (postId) => {
     saveButton.textContent = "Save";
     saveButton.addEventListener("click", () => saveEdit(postId, titleInput.value, contentInput.value));
 
+    const deleteButton = document.createElement("button");
+    deleteButton.className = 'dangerButton';
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => deletePost(postId));
+    
     postElement.innerHTML = "";
     postElement.appendChild(titleInput);
     postElement.appendChild(contentInput);
     postElement.appendChild(saveButton);
+    postElement.appendChild(deleteButton);
 };
 
 // Use then() to handle async in this function
@@ -172,4 +178,22 @@ const saveEdit = (postId, titleInput, contentInput) => {
         postElement.appendChild(editButton);
     })
     .catch(error => console.error("Error updating post:", error));
+};
+
+const deletePost = async (postId) => {
+    try{
+        const postElement = document.querySelector(`div[data-id="${postId}"]`);
+        
+        const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+            method : "DELETE",
+            headers : {
+                "Content-Type" : "application/json"
+            }
+        })
+        if (!response.ok) throw new Error(`Failed to delete the post with postId: ${postId}`);
+        postElement.remove();
+    }
+    catch(error) {
+        console.error("Error delete post: ", error)
+    }
 };
